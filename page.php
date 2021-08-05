@@ -10,7 +10,7 @@
         <p>WORDPRESS COSTUM FIELD</p>
       </div>
     </div>  
-  </div>
+</div>
 <div class="container container--narrow page-section">
   <?php $parentPageId = wp_get_post_parent_id(get_the_ID()); if ($parentPageId) { ?>
     <div class="metabox metabox--position-up metabox--with-home-link">

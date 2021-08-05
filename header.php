@@ -14,13 +14,11 @@
       <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
       <div class="site-header__menu group">
         <nav class="main-navigation">
-          <!-- <?php 
-            wp_nav_menu([
-              'theme_location' => 'headerMenu'
-            ])
-          ?> -->
+          <?php 
+            $class = is_page('about-us') ? 'current-menu-item' : '';
+          ?>
           <ul>
-            <li><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
+            <li class="<?php echo $class ?>"><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
             <li><a href="#">Programs</a></li>
             <li><a href="#">Events</a></li>
             <li><a href="#">Campuses</a></li>
