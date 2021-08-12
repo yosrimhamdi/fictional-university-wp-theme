@@ -17,11 +17,12 @@
           <?php 
             $aboutUsClass = is_page('about-us') ? 'current-menu-item' : '';
             $blogClass = get_post_type() === 'post' ? 'current-menu-item' : '';
+            $eventsClass = get_post_type() === 'event' ? 'current-menu-item' : '';
           ?>
           <ul>
             <li class="<?php echo $aboutUsClass ?>"><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
             <li><a href="#">Programs</a></li>
-            <li><a href="#">Events</a></li>
+            <li class="<?php echo $eventsClass ?>"><a href="<?php echo get_post_type_archive_link('event') ?>">Events</a></li>
             <li><a href="#">Campuses</a></li>
             <li class="<?php echo $blogClass ?>"><a href="<?php echo site_url('/blog') ?>">Blog</a></li>
           </ul>
