@@ -19,7 +19,15 @@
           'posts_per_page' => -1,
           'meta_key' => 'event_date',
           'orderby' => 'meta_value_num',
-          'order' => 'asc'
+          'order' => 'asc',
+          'meta_query' => [
+            [
+              'key' => 'event_date',
+              'compare' => '>=',
+              'value' => date('Ymd'),
+              'type' => 'numeric'
+            ]
+          ]
         ]);
 
         while ($events->have_posts()) {
