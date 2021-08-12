@@ -17,9 +17,11 @@
         $events = new WP_Query([
           'post_type' => 'event',
           'posts_per_page' => -1,
+          // ordring here
           'meta_key' => 'event_date',
           'orderby' => 'meta_value_num',
           'order' => 'asc',
+          // filtering here
           'meta_query' => [
             [
               'key' => 'event_date',
