@@ -2,6 +2,7 @@
   get_header();
 
   $oldEvents = new WP_Query([
+    'paged' => get_query_var('paged', 1),
     'post_type' => 'event',
     'meta_query' => [
       [
@@ -46,6 +47,10 @@
         </div>
     <?php
       }
+
+      echo paginate_links([
+        'total' => $oldEvents->max_num_pages
+      ]);
     ?>
   </div>
 </div>
