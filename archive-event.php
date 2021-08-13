@@ -36,5 +36,6 @@
       } 
     echo paginate_links(); 
   ?>
+  <a href="<?php echo site_url('/old-events')?>">Old Events</a>
 </div>
 <?php get_footer() ?>
