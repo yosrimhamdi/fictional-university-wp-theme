@@ -27,9 +27,22 @@
       </div>
       <div class="generic-content">
       <?php echo the_content(); ?>
+
+      <div>related programs:</div>
+        <?php
+          $relatedPrograms = get_field('related_programs');
+
+          foreach ($relatedPrograms as $program) {
+        ?>
+            <div div><a href="<?php  echo get_the_permalink($program) ?>">
+              <?php echo get_the_title($program) ?></a>
+            </div>
+        <?php
+          }
+        ?>
       </div>
     </div>
-  <?php
+<?php
   }
 ?>
 <?php get_footer() ?>
