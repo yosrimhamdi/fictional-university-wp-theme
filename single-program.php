@@ -49,13 +49,18 @@
           echo '<h2 class="headline headline--medium">' . get_the_title() .  ' Professor(s)</h2>';
         }
        
-        echo '<ul>';
+        echo '<ul class="professor-cards">';
         
         while ($professors->have_posts()) {
           $professors->the_post();
 
         ?>
-          <li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></li>
+          <li class="professor-card__list-item">
+            <a class="professor-card" href="<?php the_permalink() ?>">
+             <img class="professor-car__image" src="<?php the_post_thumbnail_url(); ?>" />
+             <span class="professor-card__name"><?php the_title(); ?></span>
+            </a>
+          </li>
         <?php
         }
         echo '</ul>';
