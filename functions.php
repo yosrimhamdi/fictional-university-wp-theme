@@ -16,13 +16,16 @@ function university_features() {
   // register_nav_menu('FooterMenuLocationTwo', 'Footer Menu Location Two');
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
+
+  add_image_size('professor-landscape', 400, 260, true);
+  add_image_size('professor-protrait', 480, 650, true);
 }
 
 add_action('after_setup_theme', 'university_features');
 
 function adjust_query($query) {
   if (is_admin() || !$query->is_main_query()) {
-    return 0;   
+    return;   
   }
 
   switch (true) {
