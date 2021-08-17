@@ -27,7 +27,9 @@
       </div>
       <div class="generic-content">
       <?php echo the_content(); ?>
-      <?php 
+      <?php
+        $eventTitle = get_the_title();
+
         $events = new WP_Query([
           'post_type' => 'event',
           'posts_per_page' => 2,
@@ -51,10 +53,15 @@
           ]
         ]);
 
+        if ($events->have_posts()) { 
+          echo '<hr class="section-break"/>';
+          echo "<h2 class='headline headline--medium'>Upcoming $eventTitle Events</h2>";  
+        }
+        
         while ($events->have_posts()) {
           $events->the_post();
 
-          $date = new DateTime(get_field('event_date'));
+          $date = new DateTime(get_field('event_date'));          
       ?>
         <div class="event-summary">
           <a class="event-summary__date t-center" href="<?php the_permalink() ?>">
