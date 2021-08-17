@@ -30,6 +30,38 @@
       <?php
         $eventTitle = get_the_title();
 
+        $professors = new WP_Query([
+          'post_type' => 'professor',
+          'posts_per_page' => -1,
+          'orderby' => 'title',
+          'order' => 'asc',
+          'meta_query' => [
+            [
+              'key' => 'related_programs',
+              'compare' => 'LIKE',
+              'value' => '"' . get_the_ID() . '"'
+            ]
+          ]
+        ]);
+
+        if ($professors->have_posts()) { 
+          echo '<hr class="section-break"/>';
+          echo '<h2 class="headline headline--medium">' . get_the_title() .  ' Professor(s)</h2>';
+        }
+       
+        echo '<ul>';
+        
+        while ($professors->have_posts()) {
+          $professors->the_post();
+
+        ?>
+          <li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></li>
+        <?php
+        }
+        echo '</ul>';
+
+        wp_reset_postdata();
+
         $events = new WP_Query([
           'post_type' => 'event',
           'posts_per_page' => 2,
@@ -52,10 +84,11 @@
             ]
           ]
         ]);
+        
 
         if ($events->have_posts()) { 
           echo '<hr class="section-break"/>';
-          echo "<h2 class='headline headline--medium'>Upcoming $eventTitle Events</h2>";  
+          echo "<h2 class='headline headline--medium'>Upcoming " . get_the_title() .  " Events</h2>";  
         }
         
         while ($events->have_posts()) {
@@ -80,7 +113,6 @@
         </div>
       <?php
         }
-
         wp_reset_postdata();
       ?>
       </div>
