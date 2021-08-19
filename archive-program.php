@@ -5,8 +5,8 @@
   $post = NULL;
   
   the_banner([
-    'title' => 'All Events',
-    'subtitle' => 'See What we have done so far.'
+    'title' => 'All Programs',
+    'subtitle' => 'See the program that suites you.'
   ]);
 ?>
 <div class="container container--narrow page-section">
