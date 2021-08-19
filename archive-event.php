@@ -1,5 +1,9 @@
 <?php 
   get_header();
+
+  global $post;
+  $post = NULL;
+
   the_banner([
     'title' => 'All Events',
     'subtitle' => 'See what\'s going on in our world.'
