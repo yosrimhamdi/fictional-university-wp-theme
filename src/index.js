@@ -1,9 +1,9 @@
 import './css/style.scss';
 
-// Our modules / classes
 import MobileMenu from './javascript/MobileMenu';
 import HeroSlider from './javascript/HeroSlider';
+import GoogleMap from './javascript/GoogleMap';
 
-// Instantiate a new object using our modules/classes
-const mobileMenu = new MobileMenu();
-const heroSlider = new HeroSlider();
+new MobileMenu();
+new HeroSlider();
+new GoogleMap();
