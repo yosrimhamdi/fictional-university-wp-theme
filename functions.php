@@ -73,3 +73,11 @@ function the_banner($args = []) {
   </div>
 <?php
 }
+
+function university_map_key($api) {
+  $api['key'] = 'AIzaSyDs7SzE2zlM9uXU4TTgBu27x4_kYFtGMUM';
+
+  return $api;
+}
+
+add_filter('acf/fields/google_map/api', 'university_map_key');
