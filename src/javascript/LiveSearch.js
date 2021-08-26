@@ -4,10 +4,10 @@ class LiveSearch {
     this.closeButton = document.querySelector('.search-overlay__close');
     this.searchOverlay = document.querySelector('.search-overlay');
 
-    this.event();
+    this.events();
   }
 
-  event() {
+  events() {
     this.openButton.addEventListener('click', this.openOverlay);
     this.closeButton.addEventListener('click', this.closeOverlay);
   }
