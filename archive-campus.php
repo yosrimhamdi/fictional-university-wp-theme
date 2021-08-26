@@ -1,4 +1,4 @@
-<?php 
+<?php
   get_header();
 
   global $post;
@@ -6,19 +6,19 @@
 
   the_banner([
     'title' => 'All Campuses',
-    'subtitle' => 'Look at that location.'
+    'subtitle' => 'Look at that location.',
   ]);
 ?>
 <div class="container container--narrow page-section">
- <div class="acf-map">
-  <?php 
-      while(have_posts()) { 
+  <div class="acf-map">
+    <?php
+      while (have_posts()) {
         the_post();
         $location = get_field('map_location');
 
-        echo "<div class='marker' data-lat='$location[lat]' data-lng='$location[lng]'></div>";
-      } 
+        the_map($location);
+      }
     ?>
- </div>
+  </div>
 </div>
 <?php get_footer() ?>
