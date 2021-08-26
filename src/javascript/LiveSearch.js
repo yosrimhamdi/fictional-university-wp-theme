@@ -3,7 +3,6 @@ class LiveSearch {
     this.openButton = document.querySelector('.open');
     this.closeButton = document.querySelector('.search-overlay__close');
     this.searchOverlay = document.querySelector('.search-overlay');
-    this.activeClass = 'search-overlay--active';
 
     this.event();
   }
@@ -14,11 +13,11 @@ class LiveSearch {
   }
 
   openOverlay = () => {
-    this.searchOverlay.classList.add(this.activeClass);
+    this.searchOverlay.classList.add('search-overlay--active');
   };
 
   closeOverlay = () => {
-    this.searchOverlay.classList.remove(this.activeClass);
+    this.searchOverlay.classList.remove('search-overlay--active');
   };
 }
 
