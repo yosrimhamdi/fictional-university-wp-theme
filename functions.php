@@ -89,7 +89,7 @@ function the_banner($args = []) {
 <?php
 }
 
-function the_map($location) {
+function the_map($location, $link = false) {
 ?>
   <div
       class="marker"
@@ -97,9 +97,17 @@ function the_map($location) {
       data-lng="<?php echo $location['lng'] ?>"
   >
     <h3>
-      <a href="<?php the_permalink();?>">
-      <?php echo get_the_title(); ?>
-    </a>
+      <?php
+        if ($link):
+      ?>
+        <a href="<?php the_permalink();?>">
+          <?php echo get_the_title(); ?>
+        </a>
+      <?php
+        else:
+          echo get_the_title();
+        endif;
+      ?>
   </h3>
     <?php echo $location['address'] ?>
   </div>

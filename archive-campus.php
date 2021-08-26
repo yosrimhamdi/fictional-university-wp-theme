@@ -16,7 +16,7 @@
         the_post();
         $location = get_field('map_location');
 
-        the_map($location);
+        the_map($location, $link = true);
       }
     ?>
   </div>
