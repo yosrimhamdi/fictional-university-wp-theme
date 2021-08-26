@@ -35,7 +35,7 @@ function adjust_query($query) {
   }
 
   switch (true) {
-  case is_post_type_archive('event'): {
+    case is_post_type_archive('event'): {
       $query->set('meta_key', 'event_date');
       $query->set('orderby', 'meta_value_num');
       $query->set('order', 'asc');
@@ -49,14 +49,19 @@ function adjust_query($query) {
       ]);
 
       break;
-    }
+      }
 
-  case is_post_type_archive('program'): {
+    case is_post_type_archive('program'): {
       $query->set('posts_per_page', -1);
       $query->set('orderby', 'title');
       $query->set('order', 'asc');
+
+      break;
+      }
+    
+    case is_post_type_archive('event'):
+      $query->set('posts_per_page', -1);
     }
-  }
 }
 
 add_action('pre_get_posts', 'adjust_query');
