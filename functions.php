@@ -59,8 +59,10 @@ function adjust_query($query) {
       break;
       }
     
-    case is_post_type_archive('event'):
+    case is_post_type_archive('campus'):
       $query->set('posts_per_page', -1);
+
+      break;
     }
 }
 
