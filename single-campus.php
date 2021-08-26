@@ -20,10 +20,41 @@ while (have_posts()) {
         </p>
       </div>
       <div class="generic-content">
-      <?php the_content() ?>
-      <div class="acf-map">
-        <?php the_map($location) ?>
-      </div>
+        <div><?php the_content() ?></div>
+        <div>
+          <?php
+            $programs = new WP_Query([
+              'post_type' => 'program',
+              'posts_per_page' => -1,
+              'orderby' => 'title',
+              'order' => 'asc',
+              'meta_query' => [
+                [
+                'key' => 'related_campuses',
+                'compare' => 'LIKE',
+                'value' => '"' . get_the_ID() . '"'
+                ]
+              ]
+            ]);
+
+            if ($programs->have_posts()) {
+              echo '<h4 class="headline headline--medium">Program(s) available at this campus</h4>';
+              echo '<ul class="min-list link-list" >';
+
+              while ($programs->have_posts()):
+                $programs->the_post();
+              ?>
+                <li><a href="<?php the_permalink() ?>"><?php echo the_title() ?></a></li>
+              <?php
+              endwhile ;
+
+              echo '</ul>';
+            }       
+          ?>
+        </div>
+        <div class="acf-map">
+          <?php the_map($location) ?>
+        </div>
       </div>
     </div>
   <?php
