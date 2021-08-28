@@ -41,7 +41,9 @@ const SearchOverlay = () => {
           ></i>
         </div>
       </div>
-      <SearchResults term={term} />
+      <div className="container">
+        <SearchResults term={term} setTerm={setTerm} />
+      </div>
     </div>
   );
 };

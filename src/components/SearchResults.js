@@ -1,15 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const SearchResults = ({ term }) => {
+import fictionalUniversity from '../apis/fictionalUniversity';
+
+const SearchResults = ({ term, setTerm }) => {
+  const [results, setResults] = useState([]);
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      // request here
-    }, 500);
+    if (term) {
+      const timerId = setTimeout(async () => {
+        const response = await fictionalUniversity.get('/posts');
 
-    return () => clearTimeout(timerId);
+        setResults(response.data);
+        setTerm('');
+      }, 500);
+
+      return () => clearTimeout(timerId);
+    }
   }, [term]);
 
-  return <div>Search Results</div>;
+  console.log(results);
+
+  if (term) {
+    return <div className="spinner-loader" />;
+  }
+
+  return null;
 };
 
 export default SearchResults;
