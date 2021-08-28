@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
 
-import Input from './Input';
+import SearchResults from './SearchResults';
 
 const SearchOverlay = () => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
+  const [term, setTerm] = useState('');
   const closeButton = useRef();
 
   useEffect(() => {
@@ -24,7 +25,14 @@ const SearchOverlay = () => {
             className="fa fa-search search-overlay__icon"
             aria-hidden="true"
           ></i>
-          <Input />
+          <input
+            type="text"
+            className="search-term"
+            placeholder="What are you looking for?"
+            id="search-term"
+            value={term}
+            onChange={e => setTerm(e.target.value)}
+          />
           <i
             className="fa fa-window-close search-overlay__close"
             aria-hidden="true"
@@ -33,6 +41,7 @@ const SearchOverlay = () => {
           ></i>
         </div>
       </div>
+      <SearchResults term={term} />
     </div>
   );
 };
