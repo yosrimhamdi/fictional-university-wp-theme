@@ -10,7 +10,7 @@ function load_files() {
   wp_enqueue_style('main-styles', get_theme_file_uri('/build/index.css'));
   wp_enqueue_style('main-styles-2', get_theme_file_uri('/build/style-index.css'));
   wp_enqueue_script('google-maps', "//maps.googleapis.com/maps/api/js?key=$googleMapKey", null, '1.0', true);
-  wp_enqueue_script('scripts', get_theme_file_uri('/build/index.js'), null, '1.0', true);
+  wp_enqueue_script('scripts', get_theme_file_uri('/build/index.js'), ['wp-element'], time(), true);
 }
 
 add_action('wp_enqueue_scripts', 'load_files');
