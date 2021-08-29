@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import SearchResults from './SearchResults';
 
 const SearchOverlay = () => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const [term, setTerm] = useState('');
   const closeButton = useRef();
 
