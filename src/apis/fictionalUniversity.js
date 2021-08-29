@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://fictional-university.local/wp-json/wp/v2',
+  baseURL: 'http://localhost:10004/wp-json/wp/v2',
 });
