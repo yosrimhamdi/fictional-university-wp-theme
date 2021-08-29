@@ -2,37 +2,42 @@ import React, { useEffect, useState } from 'react';
 
 import fictionalUniversity from '../apis/fictionalUniversity';
 import PostTypeResult from './PostTypeResult';
-
-const postTypes = ['pages', 'posts'];
+import postTypes from '../postTypes';
 
 const SearchResults = ({ term, setTerm }) => {
   const [results, setResults] = useState({});
 
   useEffect(() => {
-    if (term) {
-      const timerId = setTimeout(async () => {
-        const promises = postTypes.map(postType => {
-          return fictionalUniversity.get('/' + postType, {
-            params: {
-              search: term,
-            },
-          });
+    const fetchPosts = async () => {
+      if (!term) {
+        return;
+      }
+
+      const promises = [];
+
+      for (const postType of postTypes) {
+        const promise = fictionalUniversity.get('/' + postType, {
+          params: {
+            search: term,
+          },
         });
 
-        const results = await Promise.all(promises);
+        promises.push(promise);
+      }
 
-        const state = {};
+      const results = await Promise.all(promises);
 
-        results.forEach((result, i) => {
-          state[postTypes[i]] = result.data;
-        });
+      const state = {};
 
-        setResults(state);
-        setTerm('');
-      }, 1000);
+      results.forEach((result, i) => (state[postTypes[i]] = result.data));
 
-      return () => clearTimeout(timerId);
-    }
+      setResults(state);
+      setTerm('');
+    };
+
+    const timerId = setTimeout(fetchPosts, 1000);
+
+    return () => clearTimeout(timerId);
   }, [term]);
 
   if (term) {
