@@ -1,56 +1,50 @@
 import React, { useEffect, useState } from 'react';
 
 import fictionalUniversity from '../apis/fictionalUniversity';
-import SearchItem from './SearchItem';
+import PostTypeResult from './PostTypeResult';
 
-const SearchResults = ({ term, setTerm, overLayActive }) => {
-  const [results, setResults] = useState(null);
+const postTypes = ['pages', 'posts'];
+
+const SearchResults = ({ term, setTerm }) => {
+  const [results, setResults] = useState({});
 
   useEffect(() => {
     if (term) {
       const timerId = setTimeout(async () => {
-        const response = await fictionalUniversity.get('/pages', {
-          params: {
-            search: term,
-          },
+        const promises = postTypes.map(postType => {
+          return fictionalUniversity.get('/' + postType, {
+            params: {
+              search: term,
+            },
+          });
         });
 
+        const results = await Promise.all(promises);
+
+        const state = {};
+
+        results.forEach((result, i) => {
+          state[postTypes[i]] = result.data;
+        });
+
+        setResults(state);
         setTerm('');
-        setResults(response.data);
       }, 1000);
 
       return () => clearTimeout(timerId);
     }
   }, [term]);
 
-  useEffect(() => {
-    if (!overLayActive && results && results.length) {
-      setResults(null);
-    }
-  }, [overLayActive]);
-
   if (term) {
     return <div className="spinner-loader" />;
   }
 
-  if (results && results.length) {
-    const renderedResults = results.map(result => (
-      <SearchItem key={result.id} result={result} />
-    ));
+  const postTypeResults = Object.entries(results).map(a => {
+    const [postType, posts] = a;
+    return <PostTypeResult postType={postType} posts={posts} />;
+  });
 
-    return (
-      <div>
-        <div className="search-overlay__section-title">General Information</div>
-        <ul className="link-list min-list">{renderedResults}</ul>
-      </div>
-    );
-  }
-
-  if (results && !results.length) {
-    return <div>Ouups, sorry nothing was found!, try something else.</div>;
-  }
-
-  return null;
+  return <div>{postTypeResults}</div>;
 };
 
 export default SearchResults;

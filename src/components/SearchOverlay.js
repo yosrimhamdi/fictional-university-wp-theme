@@ -4,16 +4,12 @@ import classnames from 'classnames';
 import SearchResults from './SearchResults';
 
 const SearchOverlay = () => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const [term, setTerm] = useState('');
   const closeButton = useRef();
-  const input = useRef();
 
   useEffect(() => {
-    document.querySelector('.open').onclick = () => {
-      setActive(true);
-      setTimeout(() => input.current.focus(), 300);
-    };
+    document.querySelector('.open').onclick = () => setActive(true);
   }, []);
 
   const className = classnames({
@@ -36,7 +32,6 @@ const SearchOverlay = () => {
             id="search-term"
             value={term}
             onChange={e => setTerm(e.target.value)}
-            ref={input}
           />
           <i
             className="fa fa-window-close search-overlay__close"
@@ -47,7 +42,7 @@ const SearchOverlay = () => {
         </div>
       </div>
       <div className="container">
-        <SearchResults overLayActive={active} term={term} setTerm={setTerm} />
+        <SearchResults term={term} setTerm={setTerm} />
       </div>
     </div>
   );
