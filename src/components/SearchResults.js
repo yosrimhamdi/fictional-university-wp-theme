@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import fictionalUniversity from '../apis/fictionalUniversity';
 import SearchItem from './SearchItem';
 
-const SearchResults = ({ term, setTerm }) => {
+const SearchResults = ({ term, setTerm, overLayActive }) => {
   const [results, setResults] = useState(null);
 
   useEffect(() => {
@@ -22,6 +22,12 @@ const SearchResults = ({ term, setTerm }) => {
       return () => clearTimeout(timerId);
     }
   }, [term]);
+
+  useEffect(() => {
+    if (!overLayActive && results && results.length) {
+      setResults(null);
+    }
+  }, [overLayActive]);
 
   if (term) {
     return <div className="spinner-loader" />;
