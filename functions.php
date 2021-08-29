@@ -15,6 +15,12 @@
     if (is_page('home')) {
       wp_enqueue_script('live-search', get_theme_file_uri('/build/search.js'), ['wp-element'], time(), true);
     }
+
+    wp_localize_script(
+      'live-search',
+      'UniversityData',
+      ['root_url' => get_site_url()]
+    );
   }
 
   add_action('wp_enqueue_scripts', 'load_files');
