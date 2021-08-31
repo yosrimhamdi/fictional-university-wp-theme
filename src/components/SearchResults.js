@@ -25,11 +25,13 @@ const SearchResults = ({ term, setTerm }) => {
         promises.push(promise);
       }
 
-      const results = await Promise.all(promises);
+      const results = (await Promise.allSettled(promises)).filter(
+        result => result.status === 'fulfilled',
+      );
 
       const state = {};
 
-      results.forEach((result, i) => (state[postTypes[i]] = result.data));
+      results.forEach((result, i) => (state[postTypes[i]] = result.value.data));
 
       setResults(state);
       setTerm('');
