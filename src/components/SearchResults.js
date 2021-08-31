@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import PostTypeResult from './PostTypeResult';
 import fictionalUniversity from '../apis/fictionalUniversity';
-import postTypes from '../postTypes';
+import postTypes from './postTypes';
 
 const SearchResults = ({ term, setTerm }) => {
   const [results, setResults] = useState({});
