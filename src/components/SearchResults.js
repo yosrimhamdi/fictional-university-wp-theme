@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import PostTypeResult from './PostTypeResult';
 import useFetchResults from './useFetchResults';
@@ -13,9 +13,12 @@ const SearchResults = ({ term, setTerm }) => {
   console.log(results);
   console.log(Object.entries(results));
 
-  const postTypeResults = Object.entries(results).map(([postType, posts]) => (
-    <PostTypeResult postType={postType} posts={posts} />
-  ));
+  const postTypeResults = Object.entries(results).map(
+    ([postType, posts], i) => (
+      <PostTypeResult postType={postType} posts={posts} key={i} />
+    ),
+  );
+
   return <div>{postTypeResults}</div>;
 };
 
