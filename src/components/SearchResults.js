@@ -10,9 +10,6 @@ const SearchResults = ({ term, setTerm }) => {
     return <div className="spinner-loader" />;
   }
 
-  console.log(results);
-  console.log(Object.entries(results));
-
   const postTypeResults = Object.entries(results).map(
     ([postType, posts], i) => (
       <PostTypeResult postType={postType} posts={posts} key={i} />
