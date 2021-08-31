@@ -5,8 +5,7 @@ import SearchResults from './SearchResults';
 
 const SearchOverlay = () => {
   const [active, setActive] = useState(true);
-  const [term, setTerm] = useState('');
-  const closeButton = useRef();
+  const [term, setTerm] = useState('lorem');
 
   useEffect(() => {
     document.querySelector('.open').onclick = () => setActive(true);
@@ -36,7 +35,6 @@ const SearchOverlay = () => {
           <i
             className="fa fa-window-close search-overlay__close"
             aria-hidden="true"
-            ref={closeButton}
             onClick={() => setActive(false)}
           ></i>
         </div>
