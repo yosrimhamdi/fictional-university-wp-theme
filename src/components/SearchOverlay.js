@@ -8,7 +8,9 @@ const SearchOverlay = () => {
   const [term, setTerm] = useState('');
 
   useEffect(() => {
-    document.querySelector('.open').onclick = () => setActive(true);
+    document.querySelector('.open .fa-search').onclick = () => setActive(true);
+    document.querySelector('.js-search-trigger .fa-search').onclick = () =>
+      setActive(true);
   }, []);
 
   const className = classnames({
