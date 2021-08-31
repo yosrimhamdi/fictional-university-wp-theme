@@ -39,6 +39,7 @@ const SearchResults = ({ term, setTerm }) => {
 
     return () => clearTimeout(timerId);
   }, [term]);
+
   if (term) {
     return <div className="spinner-loader" />;
   }
