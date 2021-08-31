@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import fictionalUniversity from '../apis/fictionalUniversity';
 import postTypes from '../postTypes';
 
-const useFetchResults = (term, setTerm, setResults) => {
+const useFetchResults = (term, setTerm) => {
+  const [results, setResults] = useState({});
+
   useEffect(() => {
     const fetchPosts = async () => {
       if (!term) {
@@ -36,6 +38,8 @@ const useFetchResults = (term, setTerm, setResults) => {
 
     return () => clearTimeout(timerId);
   }, [term]);
+
+  return results;
 };
 
 export default useFetchResults;

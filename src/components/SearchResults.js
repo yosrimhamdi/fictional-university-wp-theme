@@ -4,9 +4,7 @@ import PostTypeResult from './PostTypeResult';
 import useFetchResults from './useFetchResults';
 
 const SearchResults = ({ term, setTerm }) => {
-  const [results, setResults] = useState({});
-
-  useFetchResults(term, setTerm, setResults);
+  const results = useFetchResults(term, setTerm);
 
   if (term) {
     return <div className="spinner-loader" />;
