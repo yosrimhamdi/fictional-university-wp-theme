@@ -8,32 +8,23 @@ const SearchResults = ({ term, setTerm }) => {
   const [results, setResults] = useState({});
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPosts = () => {
       if (!term) {
         return;
       }
 
-      const promises = [];
-
-      for (const postType of postTypes) {
-        const promise = fictionalUniversity.get('/' + postType, {
+      postTypes.forEach(async postType => {
+        const response = await fictionalUniversity.get('/' + postType, {
           params: {
             search: term,
           },
         });
 
-        promises.push(promise);
-      }
+        setResults(prevResults => {
+          return { ...prevResults, [postType]: response.data };
+        });
+      });
 
-      const results = (await Promise.allSettled(promises)).filter(
-        result => result.status === 'fulfilled',
-      );
-
-      const state = {};
-
-      results.forEach((result, i) => (state[postTypes[i]] = result.value.data));
-
-      setResults(state);
       setTerm('');
     };
 
