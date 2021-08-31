@@ -5,18 +5,23 @@
   "main": "index.js",
   "scripts": {
     "build": "wp-scripts build src/index.js src/search.js",
-    "start": "wp-scripts start src/index.js src/search.js"
+    "start": "npm-run-all -p bundle reload",
+    "bundle": "wp-scripts start src/index.js src/search.js",
+    "reload": "browser-sync start --config browser-sync.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "@prettier/plugin-php": "^0.17.3",
     "@wordpress/scripts": "*",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "eslint": "^7.32.0",
     "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "npm-run-all": "^4.1.5"
   }
 }
