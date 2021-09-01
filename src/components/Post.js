@@ -5,6 +5,7 @@ const Post = ({ post }) => (
     <a href={post.link} target="_blank" rel="noreferrer">
       {post.title.rendered}
     </a>
+    {post.authorName ? <span> by {post.authorName}</span> : ''}
   </li>
 );
 

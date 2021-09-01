@@ -1,5 +1,11 @@
 <?php
 
+  add_action('rest_api_init', function () {
+    register_rest_field('post', 'authorName', [
+      'get_callback' => 'get_the_author',
+    ]);
+  });
+
   $googleMapKey = 'AIzaSyDs7SzE2zlM9uXU4TTgBu27x4_kYFtGMUM';
 
   function load_files() {
@@ -94,39 +100,42 @@
     $args['subtitle'] = $args['subtitle'] ?? get_field('page_banner_subtitle');
 
   ?>
-  <div class="page-banner">
-    <div class="page-banner__bg-image" style="background-image: url(<?php echo $args['image'] ?>)"></div>
-    <div class="page-banner__content container container--narrow">
-      <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
-      <div class="page-banner__intro">
-        <p><?php echo $args['subtitle'] ?></p>
-      </div>
+<div class="page-banner">
+  <div
+    class="page-banner__bg-image"
+    style="background-image: url(<?php echo $args['image'] ?>)"
+  ></div>
+  <div class="page-banner__content container container--narrow">
+    <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
+    <div class="page-banner__intro">
+      <p><?php echo $args['subtitle'] ?></p>
     </div>
   </div>
+</div>
 <?php
   }
 
   function the_map($location, $link = false) {
   ?>
-  <div
-      class="marker"
-      data-lat="<?php echo $location['lat'] ?>"
-      data-lng="<?php echo $location['lng'] ?>"
-  >
-    <h3>
-      <?php
-        if ($link):
-        ?>
-        <a href="<?php the_permalink();?>">
-          <?php echo get_the_title(); ?>
-        </a>
-      <?php
-        else:
-            echo get_the_title();
-          endif;
-        ?>
+<div
+  class="marker"
+  data-lat="<?php echo $location['lat'] ?>"
+  data-lng="<?php echo $location['lng'] ?>"
+>
+  <h3>
+    <?php
+      if ($link):
+      ?>
+    <a href="<?php the_permalink();?>">
+      <?php echo get_the_title(); ?>
+    </a>
+    <?php
+      else:
+          echo get_the_title();
+        endif;
+      ?>
   </h3>
-    <?php echo $location['address'] ?>
-  </div>
+  <?php echo $location['address'] ?>
+</div>
 <?php
 }
