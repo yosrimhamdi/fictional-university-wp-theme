@@ -10,14 +10,7 @@ function universityRegisterSearch() {
 }
 
 function universitySearch($data) {
-  $postsTypes = [
-    'post',
-    'page',
-    'program',
-    'professor',
-    'campus',
-    'event',
-  ];
+  $postsTypes = ['post', 'page', 'program', 'professor', 'campus', 'event'];
 
   foreach ($postsTypes as $postType) {
     $professors = new WP_Query([
