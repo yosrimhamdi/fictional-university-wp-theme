@@ -11,8 +11,5 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
-  "rules": {
-    "react/prop-types": "off"
-  }
+  "plugins": ["react"]
 }
