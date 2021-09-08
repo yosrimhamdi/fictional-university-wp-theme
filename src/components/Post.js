@@ -1,12 +1,12 @@
 import React from 'react';
 
 const Post = ({ post }) => {
-  const { title, url, postType, author } = post;
+  const { title, url, postType, authorName } = post;
 
   if (postType == 'post') {
     return (
       <li>
-        <a href={url}>{title}</a> by {author}
+        <a href={url}>{title}</a> by {authorName}
       </li>
     );
   }
