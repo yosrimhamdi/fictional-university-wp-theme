@@ -29,7 +29,10 @@ function universitySearch($data) {
 
       $postTypeResult[] = [
         'title' => get_the_title(),
-        'description' => get_the_content(),
+        'description' => has_excerpt()
+          ? get_the_excerpt()
+          : wp_trim_words(get_the_content(), 18),
+        'date' => get_the_date(),
         'url' => get_the_permalink(),
         'id' => get_the_ID(),
         'authorName' => get_the_author(),
