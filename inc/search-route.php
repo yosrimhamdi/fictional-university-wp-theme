@@ -14,7 +14,7 @@ function universitySearch($data) {
   $allResults = [];
 
   foreach ($postsTypes as $postType) {
-    $professors = new WP_Query([
+    $post = new WP_Query([
       'posts_per_page' => -1,
       'post_type' => $postType,
       'orderby' => 'title',
@@ -24,18 +24,19 @@ function universitySearch($data) {
 
     $postTypeResult = [];
 
-    while ($professors->have_posts()) {
-      $professors->the_post();
+    while ($post->have_posts()) {
+      $post->the_post();
 
       $postTypeResult[] = [
         'title' => get_the_title(),
         'description' => get_the_content(),
         'url' => get_the_permalink(),
+        'id' => get_the_ID(),
         // 'image' => get_the_post_thumbnail_url('professor-portrait'),
       ];
     }
 
-    $allResults[$postType] = $postTypeResult;
+    $allResults[$postType . 's'] = $postTypeResult;
   }
 
   return $allResults;

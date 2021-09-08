@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-import PostTypeResult from './PostTypeResult';
 import fictionalUniversity from '../apis/fictionalUniversity';
-import postTypes from './postTypes';
+import SearchResult from './SearchResult';
 
 const SearchResults = ({ term, setTerm }) => {
-  const [results, setResults] = useState({});
+  const [results, setResults] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = () => {
+    const fetchPosts = async () => {
       if (!term) {
         return;
       }
 
-      postTypes.forEach(async postType => {
-        const response = await fictionalUniversity.get('/' + postType, {
-          params: {
-            search: term,
-          },
-        });
-
-        setResults(prevResults => {
-          return { ...prevResults, [postType]: response.data };
-        });
+      const response = await fictionalUniversity.get('/search', {
+        params: { term },
       });
 
+      setResults(response.data);
       setTerm('');
     };
 
@@ -37,13 +29,35 @@ const SearchResults = ({ term, setTerm }) => {
     return <div className="spinner-loader" />;
   }
 
-  const postTypeResults = Object.entries(results).map(
-    ([postType, posts], i) => (
-      <PostTypeResult postType={postType} posts={posts} key={i} />
-    ),
-  );
+  if (!results) {
+    return null;
+  }
 
-  return <div>{postTypeResults}</div>;
+  const {
+    pages,
+    posts,
+    professors,
+    programs,
+    events,
+    campuss: campuses,
+  } = results;
+
+  return (
+    <div className="row">
+      <div className="one-third">
+        <SearchResult title="Pages" posts={pages} />
+        <SearchResult title="Posts" posts={posts} />
+      </div>
+      <div className="one-third">
+        <SearchResult title="Professors" posts={professors} />
+        <SearchResult title="Programs" posts={programs} />
+      </div>
+      <div className="one-third">
+        <SearchResult title="Events" posts={events} />
+        <SearchResult title="campuses" posts={campuses} />
+      </div>
+    </div>
+  );
 };
 
 export default SearchResults;

@@ -2,11 +2,7 @@ import React from 'react';
 
 const Post = ({ post }) => (
   <li>
-    <a href={post.link} target="_blank" rel="noreferrer">
-      {post.title.rendered}
-    </a>
-    {post.authorName ? <span> by {post.authorName}</span> : ''}
+    <a href={post.url}>{post.title}</a>
   </li>
 );
-
 export default Post;
