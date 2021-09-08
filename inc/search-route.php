@@ -34,7 +34,7 @@ function universitySearch($data) {
         'id' => get_the_ID(),
         'authorName' => get_the_author(),
         'postType' => get_post_type(),
-        // 'image' => get_the_post_thumbnail_url('professor-portrait'),
+        'imageUrl' => get_the_post_thumbnail_url(null, 'professor-landscape'),
       ];
     }
 
