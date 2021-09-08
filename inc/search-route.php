@@ -32,7 +32,7 @@ function universitySearch($data) {
         'description' => get_the_content(),
         'url' => get_the_permalink(),
         'id' => get_the_ID(),
-        'author' => get_author_name(),
+        'author' => get_the_author(),
         'postType' => get_post_type(),
         // 'image' => get_the_post_thumbnail_url('professor-portrait'),
       ];

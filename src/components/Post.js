@@ -6,9 +6,7 @@ const Post = ({ post }) => {
   if (postType == 'post' || postType == 'page') {
     return (
       <li>
-        <a href={url}>
-          {title} by {author}
-        </a>
+        <a href={url}>{title}</a> by {author}
       </li>
     );
   }
