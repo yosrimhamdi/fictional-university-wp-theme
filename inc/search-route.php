@@ -38,7 +38,11 @@ function universitySearch($data) {
       ];
     }
 
-    $allResults[$postType . 's'] = $postTypeResult;
+    if ($postType == 'campus') {
+      $allResults['campuses'] = $postTypeResult;
+    } else {
+      $allResults[$postType . 's'] = $postTypeResult;
+    }
   }
 
   return $allResults;

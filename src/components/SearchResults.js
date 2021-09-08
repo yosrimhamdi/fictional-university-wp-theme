@@ -33,14 +33,7 @@ const SearchResults = ({ term, setTerm }) => {
     return null;
   }
 
-  const {
-    pages,
-    posts,
-    professors,
-    programs,
-    events,
-    campuss: campuses,
-  } = results;
+  const { pages, posts, professors, programs, events, campuses } = results;
 
   return (
     <div className="row">
