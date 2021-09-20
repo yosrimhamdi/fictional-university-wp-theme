@@ -48,12 +48,12 @@ const Post = ({ post }) => {
             <h5 className="event-summary__title headline headline--tiny">
               <a href={url}>{title}</a>
             </h5>
-            <p>
-              {description}
+            <div>
+              <p style={{ marginBottom: '0' }}>{description}</p>
               <a href={url} className="nu gray">
                 Read more
               </a>
-            </p>
+            </div>
           </div>
         </div>
       );

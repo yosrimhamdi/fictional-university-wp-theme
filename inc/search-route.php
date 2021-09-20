@@ -37,7 +37,7 @@ function universitySearch($data) {
         'imageUrl' => get_the_post_thumbnail_url(null, 'professor-landscape'),
         'description' => has_excerpt()
           ? get_the_excerpt()
-          : wp_trim_words(get_the_content(), 18),
+          : wp_trim_words(get_the_content(), 10),
       ];
     }
 
