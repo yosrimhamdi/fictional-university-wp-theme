@@ -56,14 +56,19 @@ function getRelatedProgramPosts($programsIds) {
 
       $posts = new WP_Query([
         'post_type' => $postType,
+        'meta_query' => [
+          [
+            'key' => 'related_programs',
+            'compare' => 'LIKE',
+            'value' => '"' . $id . '"',
+          ],
+        ],
       ]);
 
       while ($posts->have_posts()) {
         $posts->the_post();
 
-        if (get_field('related_programs')[0]->ID == $id) {
-          $postTypeResult[] = get_formatted_post();
-        }
+        $postTypeResult[] = get_formatted_post();
       }
 
       $results[$postType . 's'] = array_merge(
