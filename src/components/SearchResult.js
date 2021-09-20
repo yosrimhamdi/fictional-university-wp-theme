@@ -7,7 +7,7 @@ const SearchResult = ({ title, posts }) => {
     return null;
   }
 
-  const renderedPosts = posts.map(post => <Post key={post.id} post={post} />);
+  const renderedPosts = posts.map((post) => <Post key={post.id} post={post} />);
 
   return (
     <>

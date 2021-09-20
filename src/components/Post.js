@@ -32,7 +32,11 @@ const Post = ({ post }) => {
     case 'event':
       return (
         <div className="event-summary">
-          <a className="event-summary__date t-center" href={url}>
+          <a
+            className="event-summary__date t-center"
+            href={url}
+            style={{ color: 'white' }}
+          >
             <span className="event-summary__month">
               {moment(date).format('MMM')}
             </span>
