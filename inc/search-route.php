@@ -68,7 +68,7 @@ function getRelatedProgramPosts($programsIds) {
       while ($posts->have_posts()) {
         $posts->the_post();
 
-        if (isNew($results[$postType . 's'], get_formatted_post())) {
+        if (isNew($results[$postType . 's'], get_the_ID())) {
           $postTypeResult[] = get_formatted_post();
         }
       }
@@ -98,9 +98,9 @@ function get_formatted_post() {
   ];
 }
 
-function isNew($posts, $post) {
-  foreach ($posts as $p) {
-    if ($p->id == $post->id) {
+function isNew($posts, $postId) {
+  foreach ($posts as $post) {
+    if ($post['id'] == $postId) {
       return false;
     }
   }
