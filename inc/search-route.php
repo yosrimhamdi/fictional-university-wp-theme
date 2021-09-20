@@ -68,7 +68,9 @@ function getRelatedProgramPosts($programsIds) {
       while ($posts->have_posts()) {
         $posts->the_post();
 
-        $postTypeResult[] = get_formatted_post();
+        if (isNew($results[$postType . 's'], get_formatted_post())) {
+          $postTypeResult[] = get_formatted_post();
+        }
       }
 
       $results[$postType . 's'] = array_merge(
@@ -94,4 +96,14 @@ function get_formatted_post() {
       ? get_the_excerpt()
       : wp_trim_words(get_the_content(), 10),
   ];
+}
+
+function isNew($posts, $post) {
+  foreach ($posts as $p) {
+    if ($p->id == $post->id) {
+      return false;
+    }
+  }
+
+  return true;
 }
