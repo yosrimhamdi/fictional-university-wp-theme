@@ -10,8 +10,9 @@ function universityRegisterSearch() {
 }
 
 function universitySearch($data) {
-  $postsTypes = ['post', 'page', 'program', 'professor', 'campus', 'event'];
-  $allResults = [];
+  $postsTypes = ['post', 'page', 'program', 'campus'];
+  $results = [];
+  $programsIds = [];
 
   foreach ($postsTypes as $postType) {
     $post = new WP_Query([
@@ -27,26 +28,65 @@ function universitySearch($data) {
     while ($post->have_posts()) {
       $post->the_post();
 
-      $postTypeResult[] = [
-        'title' => get_the_title(),
-        'date' => get_the_date(),
-        'url' => get_the_permalink(),
-        'id' => get_the_ID(),
-        'authorName' => get_the_author(),
-        'postType' => get_post_type(),
-        'imageUrl' => get_the_post_thumbnail_url(null, 'professor-landscape'),
-        'description' => has_excerpt()
-          ? get_the_excerpt()
-          : wp_trim_words(get_the_content(), 10),
-      ];
+      $postTypeResult[] = get_formatted_post();
+
+      if ($postType == 'program') {
+        $programsIds[] = get_the_ID();
+      }
     }
 
     if ($postType == 'campus') {
-      $allResults['campuses'] = $postTypeResult;
+      $results['campuses'] = $postTypeResult;
     } else {
-      $allResults[$postType . 's'] = $postTypeResult;
+      $results[$postType . 's'] = $postTypeResult;
     }
   }
 
-  return $allResults;
+  return array_merge($results, getRelatedProgramPosts($programsIds));
+}
+
+function getRelatedProgramPosts($programsIds) {
+  $relatedProgramPostTypes = ['professor', 'event'];
+
+  $results = ['professors' => [], 'events' => []];
+
+  foreach ($programsIds as $id) {
+    foreach ($relatedProgramPostTypes as $postType) {
+      $postTypeResult = [];
+
+      $posts = new WP_Query([
+        'post_type' => $postType,
+      ]);
+
+      while ($posts->have_posts()) {
+        $posts->the_post();
+
+        if (get_field('related_programs')[0]->ID == $id) {
+          $postTypeResult[] = get_formatted_post();
+        }
+      }
+
+      $results[$postType . 's'] = array_merge(
+        $results[$postType . 's'],
+        $postTypeResult
+      );
+    }
+  }
+
+  return $results;
+}
+
+function get_formatted_post() {
+  return [
+    'title' => get_the_title(),
+    'date' => get_the_date(),
+    'url' => get_the_permalink(),
+    'id' => get_the_ID(),
+    'authorName' => get_the_author(),
+    'postType' => get_post_type(),
+    'imageUrl' => get_the_post_thumbnail_url(null, 'professor-landscape'),
+    'description' => has_excerpt()
+      ? get_the_excerpt()
+      : wp_trim_words(get_the_content(), 10),
+  ];
 }

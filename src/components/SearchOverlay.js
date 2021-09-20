@@ -32,7 +32,7 @@ const SearchOverlay = () => {
             placeholder="What are you looking for?"
             id="search-term"
             value={term}
-            onChange={e => setTerm(e.target.value)}
+            onChange={(e) => setTerm(e.target.value)}
           />
           <i
             className="fa fa-window-close search-overlay__close"
