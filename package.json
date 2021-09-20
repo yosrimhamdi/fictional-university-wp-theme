@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "@wordpress/scripts": "*",
+    "@wordpress/scripts": "^18.0.1",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "moment": "^2.29.1",
