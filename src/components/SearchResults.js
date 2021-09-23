@@ -12,12 +12,15 @@ const SearchResults = ({ term, setTerm }) => {
         return;
       }
 
-      const response = await fictionalUniversity.get('/search', {
-        params: { term },
-      });
-
-      setResults(response.data);
-      setTerm('');
+      try {
+        const response = await fictionalUniversity.get('/search', {
+          params: { term },
+        });
+        setResults(response.data);
+        setTerm('');
+      } catch (e) {
+        console.log('error');
+      }
     };
 
     const timerId = setTimeout(fetchPosts, 500);

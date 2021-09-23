@@ -10,7 +10,7 @@ function universityRegisterSearch() {
 }
 
 function universitySearch($data) {
-  $postsTypes = ['post', 'page', 'program', 'campus'];
+  $postsTypes = ['post', 'page', 'program'];
   $results = [];
   $programsIds = [];
 
@@ -46,9 +46,9 @@ function universitySearch($data) {
 }
 
 function getRelatedProgramPosts($programsIds) {
-  $relatedProgramPostTypes = ['professor', 'event'];
+  $relatedProgramPostTypes = ['professor', 'event', 'campus'];
 
-  $results = ['professors' => [], 'events' => []];
+  $results = ['professors' => [], 'events' => [], 'campuses' => []];
 
   foreach ($programsIds as $id) {
     foreach ($relatedProgramPostTypes as $postType) {
@@ -73,10 +73,17 @@ function getRelatedProgramPosts($programsIds) {
         }
       }
 
-      $results[$postType . 's'] = array_merge(
-        $results[$postType . 's'],
-        $postTypeResult
-      );
+      if ($postType === 'campus') {
+        $results[$postType . 'es'] = array_merge(
+          $results[$postType . 'es'],
+          $postTypeResult
+        );
+      } else {
+        $results[$postType . 's'] = array_merge(
+          $results[$postType . 's'],
+          $postTypeResult
+        );
+      }
     }
   }
 
