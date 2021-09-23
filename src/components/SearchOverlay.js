@@ -4,8 +4,8 @@ import classnames from 'classnames';
 import SearchResults from './SearchResults';
 
 const SearchOverlay = () => {
-  const [active, setActive] = useState(true);
-  const [term, setTerm] = useState('lorem');
+  const [active, setActive] = useState(false);
+  const [term, setTerm] = useState('');
 
   useEffect(() => {
     document.querySelector('.open .fa-search').onclick = () => setActive(true);
