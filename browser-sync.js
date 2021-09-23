@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 module.exports = {
-  proxy: 'http://localhost:10004/',
+  proxy: 'http://fictional-university.local/',
   notify: false,
   files: __dirname,
 };

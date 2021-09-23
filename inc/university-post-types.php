@@ -21,6 +21,7 @@ function university_post_types() {
 
   register_post_type('program', [
     'menu_icon' => 'dashicons-book-alt',
+    'supports' => ['title'],
     'public' => true,
     'labels' => [
       'name' => 'Programs',
