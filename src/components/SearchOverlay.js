@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 
 import SearchResults from './SearchResults';
@@ -7,11 +7,35 @@ const SearchOverlay = () => {
   const [active, setActive] = useState(false);
   const [term, setTerm] = useState('');
 
+  const inputRef = useRef();
+
   useEffect(() => {
     document.querySelector('.open .fa-search').onclick = () => setActive(true);
     document.querySelector('.js-search-trigger .fa-search').onclick = () =>
       setActive(true);
   }, []);
+
+  useEffect(() => {
+    if (active) {
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 300);
+    }
+  }, [active]);
+
+  useEffect(() => {
+    const onKeyup = (e) => {
+      if (e.keyCode === 27 && active) {
+        setActive(false);
+      } else if (e.keyCode === 83 && !active) {
+        setActive(true);
+      }
+    };
+
+    document.body.addEventListener('keyup', onKeyup);
+
+    return () => document.body.removeEventListener('keyup', onKeyup);
+  }, [active]);
 
   const className = classnames({
     'search-overlay': true,
@@ -32,6 +56,7 @@ const SearchOverlay = () => {
             placeholder="What are you looking for?"
             id="search-term"
             value={term}
+            ref={inputRef}
             onChange={(e) => setTerm(e.target.value)}
           />
           <i
